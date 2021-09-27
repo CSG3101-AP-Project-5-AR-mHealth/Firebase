@@ -19,7 +19,7 @@ def get_access_token():
   return access_token_info.access_token
 # [END retrieve_access_token]
 
-def send_fcm_message(fcm_message):
+def send_fcm_message(fcm_message, registration_token = None):
   # [START use_access_token]
   headers = {
     'Authorization': 'Bearer ' + get_access_token(),
@@ -35,14 +35,14 @@ def send_fcm_message(fcm_message):
     print('Unable to send message to Firebase')
     print(resp.text)
 
-def build_common_message():
+def build_common_message(registrationToken = None):
   return {
     'message': {
       'notification': {
         'title': 'API Test Notification',
         'body': 'Test Successful!'
       },
-      'token': REGISTRATION_TOKEN
+      'token': registrationToken or REGISTRATION_TOKEN
     }
   }
 
@@ -60,4 +60,4 @@ def main():
 python messaging.py --message=common-message''')
 
 
-main()
+#main()

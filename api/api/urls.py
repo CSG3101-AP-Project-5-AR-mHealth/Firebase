@@ -18,5 +18,6 @@ from django.urls import path
 from webapi import views
 
 urlpatterns = [
-    path('registration/', views.registration_addtoken)
+    path('registration/', views.registration_addtoken),
+    path('vitalsdata/', views.inputdata_adddata)
 ]
