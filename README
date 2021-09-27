@@ -14,3 +14,5 @@ Install dependencies:
 Run the django server, navigate to the Firebase git repository:
   cd api
   python manage.py runsslserver 0.0.0.0:8000
+
+Access api via https://internalipofapipc:8000/...
