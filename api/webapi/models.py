@@ -7,3 +7,4 @@ class InputData(models.Model):
     datetime = models.DateTimeField()
     heartRate = models.IntegerField()
     steps = models.IntegerField()
+    temperature = models.IntegerField()

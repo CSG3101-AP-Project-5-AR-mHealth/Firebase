@@ -9,4 +9,4 @@ class RegistrationSerializer(serializers.ModelSerializer):
 class InputDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = InputData
-        fields = [ 'id', 'datetime', 'heartRate', 'steps' ]
+        fields = [ 'id', 'datetime', 'heartRate', 'steps', 'temperature' ]

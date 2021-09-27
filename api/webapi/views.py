@@ -41,5 +41,5 @@ def process_model_on_recent_data():
 
     # call model here
 
-    fcm_token = Registraction.objects.all().order_by('-id')[:1]
-    send_fcm_message(build_common_message(fcm_token))
+    fcm_token = Registration.objects.all().order_by('-id')[:1]
+    #send_fcm_message(build_common_message(fcm_token))
