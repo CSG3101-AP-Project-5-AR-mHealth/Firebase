@@ -9,7 +9,8 @@ Run the virtual environment:
 Install dependencies:
   pip install django
   pip install djangorestframework
+  pip install django-sslserver
 
 Run the django server, navigate to the Firebase git repository:
   cd api
-  python manage.py runserver
+  python manage.py runsslserver 0.0.0.0:8000
