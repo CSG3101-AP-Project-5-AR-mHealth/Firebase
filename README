@@ -1,0 +1,15 @@
+The api is best run in a python virtual environment either, this can be done through Anaconda or the following python instructions:
+
+Create the virtual environment:
+  python -m venv C:\whereever\nameofenv
+
+Run the virtual environment:
+  C:\whereever\nameofenv\Scripts\activate
+
+Install dependencies:
+  pip install django
+  pip install djangorestframework
+
+Run the django server, navigate to the Firebase git repository:
+  cd api
+  python manage.py runserver
