@@ -16,6 +16,7 @@ def registration_addtoken(request):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
+        print(serializer.errors)
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt

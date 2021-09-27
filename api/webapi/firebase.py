@@ -4,12 +4,12 @@ import requests
 
 from oauth2client.service_account import ServiceAccountCredentials
 
-PROJECT_ID = 'mheathtest'
+PROJECT_ID = 'mhealth-app-b0e54'
 BASE_URL = 'https://fcm.googleapis.com'
 FCM_ENDPOINT = 'v1/projects/' + PROJECT_ID + '/messages:send'
 FCM_URL = BASE_URL + '/' + FCM_ENDPOINT
 SCOPES = ['https://www.googleapis.com/auth/firebase.messaging']
-REGISTRATION_TOKEN = 'cW_lKsfmRiydbo0EA-7Nde:APA91bGCtHTnyIhKQ-Stx6Y6TrCwI2zCI2RLnV2vSmLD2a05FaL2OiySO2uCs8cuxWQjGScgZPOptgo-ec_9LB5xEKMPcSIPTJpMQm3966dggn33RNCGRvBUgmlCCmFXBoyepAXzgQza'
+REGISTRATION_TOKEN = 'fz_yudrwQ4e7IyUD067oBF:APA91bE3IZ6yVtjSUu8O9iM8A9jLtgIO7tQHDOA4db04ULvzFTDydBjb92ctuiNvod-KLojPjVuEO6lEXmT_ORX1-VrPVnfD_ln12g8uPz3WcygkbBh0o2ou-GJSb9GVluNeU5USVo-j'
 
 # [START retrieve_access_token]
 def get_access_token():

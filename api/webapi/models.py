@@ -1,7 +1,7 @@
 from django.db import models
 
 class Registration(models.Model):
-    token = models.CharField(max_length=162)
+    token = models.CharField(max_length=255)
 
 class InputData(models.Model):
     datetime = models.DateTimeField()
