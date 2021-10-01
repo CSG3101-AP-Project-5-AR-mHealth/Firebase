@@ -57,7 +57,7 @@ df_training_value = (df_training - training_mean) / training_std
 print("\nMean:", str(training_mean), "Standard: ", str(training_std))
 print("\nNumber of training samples:", len(df_training_value))
 
-TIME_STEPS = 288
+TIME_STEPS = 1
 
 # This is used to predict anomalies later with time steps being reduced to 1.
 def create_sequences(values, time_steps=TIME_STEPS):

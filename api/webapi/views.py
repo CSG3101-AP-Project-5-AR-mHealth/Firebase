@@ -40,7 +40,7 @@ def inputdata_adddata(request):
 def process_model_on_recent_data(data):
     # call model here
     anomalies = predict_anomaly(data)
-    if len(anomalies) >= 1:
+    if anomalies[0].size:
         print("Anomaly detected at: ", data[anomalies[0][0]])
         fcm_token = Registration.objects.all().order_by('-id')[:1]
         print("Sending Notification")
