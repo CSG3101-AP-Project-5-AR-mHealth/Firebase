@@ -4,6 +4,8 @@ from rest_framework.parsers import JSONParser
 from webapi.models import InputData, Registration
 from webapi.serializers import InputDataSerializer, RegistrationSerializer
 from .firebase import send_fcm_message, build_common_message
+from timeseries_model.run_model import predict_anomaly
+
 
 @csrf_exempt
 def registration_addtoken(request):
@@ -25,22 +27,22 @@ def inputdata_adddata(request):
         return HttpResponse(status=404)
 
     if request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = InputDataSerializer(data=data)
+        data = JSONParser().parse(request)      
+        serializer = InputDataSerializer(data=data, many=True)
         if serializer.is_valid():
             serializer.save()
 
-            process_model_on_recent_data()
+            process_model_on_recent_data(serializer.data)
 
-            return JsonResponse(serializer.data, status=201)
+            return JsonResponse(serializer.data, status=201, safe=False)
         return JsonResponse(serializer.errors, status=400)
 
-
-def process_model_on_recent_data():
-    # take the last 5 input data rows from the database
-    recentData = InputData.objects.all().order_by('-id')[:5]
-
+def process_model_on_recent_data(data):
     # call model here
+    anomalies = predict_anomaly(data)
+    if len(anomalies) >= 1:
+        print("Anomaly detected at: ", data[anomalies[0][0]])
+        fcm_token = Registration.objects.all().order_by('-id')[:1]
+        print("Sending Notification")
+        #send_fcm_message(build_common_message(fcm_token))
 
-    fcm_token = Registration.objects.all().order_by('-id')[:1]
-    #send_fcm_message(build_common_message(fcm_token))

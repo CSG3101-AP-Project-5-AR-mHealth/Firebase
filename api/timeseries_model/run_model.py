@@ -20,9 +20,10 @@ def predict_anomaly(data):
     df = pd.json_normalize(data)
     df['datetime'] = pd.to_datetime(df['datetime'])
     df = df.set_index('datetime')
+    df = df.drop(['id', 'steps', 'temperature'], axis=1)
 
     #load model
-    model = keras.models.load_model("saved_model")
+    model = keras.models.load_model(os.path.join("timeseries_model","saved_model"))
     # TODO: Load threshold, training mean and training standard at the moment hard coded
     training_mean = 60.366638
     training_std = 13.195903
@@ -71,5 +72,3 @@ def test_model():
     anomalies = predict_anomaly(d) 
     assert anomalies[0][0] == 8, "failed to pick up anomaly"   
     print("Anomaly detected at: ", d[anomalies[0][0]])
-
-test_model()
