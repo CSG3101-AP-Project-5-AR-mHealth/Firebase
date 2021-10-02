@@ -27,7 +27,9 @@ def predict_anomaly(data):
     # TODO: Load threshold, training mean and training standard at the moment hard coded
     training_mean = 60.366638
     training_std = 13.195903
-    threshold = 0.6135520352243726
+    threshold = 0.24467585978885726 # 124
+    # threshold = 0.44467585978885726 # 150
+    # threshold = 0.6135520352243726 # 160
 
     #Prepare data
     df_test_value = (df - training_mean) / training_std
