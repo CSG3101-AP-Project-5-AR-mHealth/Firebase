@@ -9,7 +9,7 @@ BASE_URL = 'https://fcm.googleapis.com'
 FCM_ENDPOINT = 'v1/projects/' + PROJECT_ID + '/messages:send'
 FCM_URL = BASE_URL + '/' + FCM_ENDPOINT
 SCOPES = ['https://www.googleapis.com/auth/firebase.messaging']
-REGISTRATION_TOKEN = 'fz_yudrwQ4e7IyUD067oBF:APA91bE3IZ6yVtjSUu8O9iM8A9jLtgIO7tQHDOA4db04ULvzFTDydBjb92ctuiNvod-KLojPjVuEO6lEXmT_ORX1-VrPVnfD_ln12g8uPz3WcygkbBh0o2ou-GJSb9GVluNeU5USVo-j'
+REGISTRATION_TOKEN = 'cRDItj-FQb-P7at0tu5Ykq:APA91bHifI8Z9A6h1j6sejVf48RfK2XajeYgafLLKCCvGl1AYl2jNbYYhtnuSOVhn2ezwCQjkhU6ADlT08VtWMYGp9mMbjJCT58o4v2SEa1Ym3z9uSA7-6LHMg6M0ytcngtc-tFbd1Dv'
 
 # [START retrieve_access_token]
 def get_access_token():
@@ -19,7 +19,7 @@ def get_access_token():
   return access_token_info.access_token
 # [END retrieve_access_token]
 
-def send_fcm_message(fcm_message, registration_token = None):
+def send_fcm_message(fcm_message):
   # [START use_access_token]
   headers = {
     'Authorization': 'Bearer ' + get_access_token(),
@@ -35,8 +35,20 @@ def send_fcm_message(fcm_message, registration_token = None):
     print('Unable to send message to Firebase')
     print(resp.text)
 
-def build_common_message(registrationToken = None):
+def build_common_message(registrationToken = None, heartRate = '200'):
   return {
+    'message': {
+        'notification': {
+            'title': 'Anomalous Vitals Detected',
+            'body': 'Are you ok?'
+        },
+        'data': {
+            'heartRate': heartRate
+        },
+        'token': registrationToken or REGISTRATION_TOKEN
+    }
+  }
+  '''{
     'message': {
       'notification': {
         'title': 'API Test Notification',
@@ -44,7 +56,7 @@ def build_common_message(registrationToken = None):
       },
       'token': registrationToken or REGISTRATION_TOKEN
     }
-  }
+  }'''
 
 def main():
   parser = argparse.ArgumentParser()
