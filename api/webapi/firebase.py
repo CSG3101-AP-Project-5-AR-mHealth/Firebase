@@ -14,7 +14,7 @@ REGISTRATION_TOKEN = 'cRDItj-FQb-P7at0tu5Ykq:APA91bHifI8Z9A6h1j6sejVf48RfK2XajeY
 # [START retrieve_access_token]
 def get_access_token():
   credentials = ServiceAccountCredentials.from_json_keyfile_name(
-      'service-account.json', SCOPES)
+      'webapi/service-account.json', SCOPES)
   access_token_info = credentials.get_access_token()
   return access_token_info.access_token
 # [END retrieve_access_token]
