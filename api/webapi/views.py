@@ -6,7 +6,6 @@ from webapi.serializers import InputDataSerializer, RegistrationSerializer
 from .firebase import send_fcm_message, build_common_message
 from timeseries_model.run_model import predict_anomaly, test_model
 
-
 @csrf_exempt
 def registration_addtoken(request):
     if request.method == 'GET':
@@ -16,7 +15,11 @@ def registration_addtoken(request):
         data = JSONParser().parse(request)
         serializer = RegistrationSerializer(data=data)
         if serializer.is_valid():
-            serializer.save()
+            fcm_token = list(Registration.objects.all().order_by('-id')[:1])[0]
+            # save the token if the last saved token doesn't match the token being
+            # sent by the android application
+            if fcm_token.token != serializer.validated_data['token']:
+                serializer.save()
             return JsonResponse(serializer.data, status=201)
         print(serializer.errors)
         return JsonResponse(serializer.errors, status=400)
@@ -42,6 +45,7 @@ def process_model_on_recent_data(data):
     anomalies = predict_anomaly(data)
     if anomalies[0].size:
         print("Anomaly detected at: ", data[anomalies[0][0]])
+        # list forces the QuerySet to be evaluated
         fcm_token = list(Registration.objects.all().order_by('-id')[:1])
         print("Sending Notification")
         send_fcm_message(build_common_message(fcm_token[0].token, str(data[anomalies[0][0]]['heartRate'])))

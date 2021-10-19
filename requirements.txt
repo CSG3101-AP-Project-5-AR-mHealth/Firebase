@@ -1,0 +1,8 @@
+django
+djangorestframework
+django-sslserver
+requests
+oauth2client
+tensorflow
+matplotlib
+pandas

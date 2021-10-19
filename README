@@ -6,13 +6,33 @@ Create the virtual environment:
 Run the virtual environment:
   C:\whereever\nameofenv\Scripts\activate
 
-Install dependencies:
-  pip install django
-  pip install djangorestframework
-  pip install django-sslserver
+Install dependencies, navigate to the Firebase git repository then run:
+  pip install -r requirements.txt
 
-Run the django server, navigate to the Firebase git repository:
+Run the django server, navigate to the Firebase git repository then run:
   cd api
   python manage.py runsslserver 0.0.0.0:8000
 
-Access api via https://internalipofapipc:8000/...
+Access to api via https://<LanIpOfApiPc>:8000/<endpoint>/
+
+#######
+Notes:
+
+You will need the ip address that the django server is running on, this will be
+the local area network address of the machine you are running it on. You can get This
+by opening a command prompt and running ipconfig and looking for the IPv4 Address entry.
+You will need to enter this ip address into the android application settings page, with
+the port number 8000.
+
+Endpoint routes are specified in the /api/api/urls.py file, these use a list of url
+patterns that specify the endpoint name and the view method that handles requests
+to that endpoint.
+
+View methods are located in /api/webapi/views.py.
+
+Adding/removing/modifying /api/webapi/models.py will require making a migration
+by running:
+  python manage.py migrate
+
+Ensure any addition/removing of model fields also get updated in /api/webapi/serializers.py
+to enable correct json serialization/deserialzation.
